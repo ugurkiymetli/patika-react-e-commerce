@@ -1,13 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
-import { Button, ButtonGroup } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
+
+import { BsShop } from "react-icons/bs";
 function Navbar() {
   return (
     <nav className={styles.nav}>
       <div className={styles.left}>
-        <div className="logo">
-          <Link to="/">Logo</Link>
+        <div className={styles.logo}>
+          <Button leftIcon={<BsShop />} color="#000" variant="link">
+            <Link to="/">E-Commerce React</Link>
+          </Button>
         </div>
 
         <ul className={styles.menu}>
