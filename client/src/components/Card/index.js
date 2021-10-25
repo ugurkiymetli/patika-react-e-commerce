@@ -14,6 +14,8 @@ function Card({ item }) {
             objectFit="cover"
             alt={item.description}
             loading="lazy"
+            mx="auto"
+            alignSelf="center"
           />
         </Box>
         <Box p="6">
