@@ -7,7 +7,7 @@ function Card({ item }) {
   return (
     <Box borderWidth="1px" borderRadius="lg" overflow="hidden" p="3" pb="1">
       <Link to={`/product/${item._id}`}>
-        <Box height="40%">
+        <Box height="30vh">
           <Image
             src={item.image}
             maxHeight="100%"
@@ -35,7 +35,9 @@ function Card({ item }) {
           </Box>
         </Box>
       </Link>
-      <Button leftIcon={<MdShoppingBasket />}>Add to basket</Button>
+      <Button mb="4" leftIcon={<MdShoppingBasket />}>
+        Add to basket
+      </Button>
     </Box>
   );
 }
