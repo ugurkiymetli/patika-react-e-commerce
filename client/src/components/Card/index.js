@@ -29,7 +29,7 @@ function Card({ item }) {
 
           <Box>
             <Text as="s" mr="3" fontSize="medium">
-              {parseInt(item.price).toPrecision(2) * 1.2}₺
+              {Math.round(parseInt(item.price).toPrecision(2) * 1.2)}₺
             </Text>
             {item.price} ₺
           </Box>
