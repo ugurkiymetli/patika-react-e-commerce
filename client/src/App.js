@@ -5,6 +5,8 @@ import SigIn from "./pages/Auth/Sigin";
 import SignUp from "./pages/Auth/Signup";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
+import Profile from "./pages/Profile";
+import ProtectedRoute from "./pages/ProtectedRoute";
 function App() {
   return (
     <Router>
@@ -20,6 +22,7 @@ function App() {
             />
             <Route path="/signin" component={SigIn} />
             <Route path="/signup" component={SignUp} />
+            <ProtectedRoute path="/profile" component={Profile} />
           </Switch>
         </div>
       </div>
