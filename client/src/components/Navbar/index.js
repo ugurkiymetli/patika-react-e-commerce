@@ -4,9 +4,12 @@ import styles from "./styles.module.css";
 import { Button } from "@chakra-ui/react";
 import { BsShop } from "react-icons/bs";
 import { useAuth } from "../../context/AuthContext";
+import { useBasket } from "../../context/BasketContext";
+import { MdShoppingBasket } from "react-icons/md";
 function Navbar() {
   const { isLoggedIn } = useAuth();
-  console.log(isLoggedIn);
+  const { items } = useBasket();
+  console.log("basket: ", items);
   return (
     <nav className={styles.nav}>
       <div className={styles.left}>
@@ -37,6 +40,17 @@ function Navbar() {
         )}
         {isLoggedIn && (
           <>
+            {items.length > 0 && (
+              <Link to="/basket">
+                <Button
+                  colorScheme="teal"
+                  variant="outline"
+                  leftIcon={<MdShoppingBasket />}
+                >
+                  Basket ({items.length})
+                </Button>
+              </Link>
+            )}
             <Link to="/profile">
               <Button colorScheme="teal">Profile</Button>
             </Link>

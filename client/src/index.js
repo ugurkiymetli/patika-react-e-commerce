@@ -4,6 +4,8 @@ import "./index.css";
 import "./reset.css";
 //contexts
 import { AuthProvider } from "./context/AuthContext";
+import { BasketProvider } from "./context/BasketContext";
+
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
@@ -21,7 +23,9 @@ ReactDOM.render(
     <QueryClientProvider client={queryClient}>
       <ChakraProvider>
         <AuthProvider>
-          <App />
+          <BasketProvider>
+            <App />
+          </BasketProvider>
         </AuthProvider>
       </ChakraProvider>
       <ReactQueryDevtools initialIsOpen={false} />

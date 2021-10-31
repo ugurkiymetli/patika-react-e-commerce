@@ -1,15 +1,18 @@
 import { Text, Button, SimpleGrid, Box, Image } from "@chakra-ui/react";
+import moment from "moment";
+import { MdAddShoppingCart, MdRemoveShoppingCart } from "react-icons/md";
+
 import { useQuery } from "react-query";
 import { useParams } from "react-router";
 import { fetchProduct } from "../../api";
-import { MdShoppingBasket } from "react-icons/md";
-import moment from "moment";
-
+import { useBasket } from "../../context/BasketContext";
 function ProductDetail() {
   const { product_id } = useParams();
   const { isLoading, error, data } = useQuery(["product", product_id], () =>
     fetchProduct(product_id)
   );
+  const { addToBasket, items } = useBasket();
+  const findBasketItem = items.find((item) => item._id === product_id);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -48,12 +51,20 @@ function ProductDetail() {
           <p>{data.description}</p>
           <Text mt="3" as="h3" fontSize="2xl">
             <Text as="s" mr="3" fontSize="medium">
-              {parseInt(data.price).toPrecision(2) * 1.2}₺
+              {(parseInt(data.price) * 1.2).toFixed(2)} ₺
             </Text>
             {data.price} ₺
           </Text>
-          <Button w="50%" mt="3" leftIcon={<MdShoppingBasket />}>
-            Add to basket
+          <Button
+            w="50%"
+            mt="3"
+            leftIcon={
+              findBasketItem ? <MdRemoveShoppingCart /> : <MdAddShoppingCart />
+            }
+            colorScheme={findBasketItem ? "red" : "gray"}
+            onClick={() => addToBasket(data, findBasketItem)}
+          >
+            {findBasketItem ? "Remove from Basket" : "Add to basket"}
           </Button>
         </Box>
       </SimpleGrid>

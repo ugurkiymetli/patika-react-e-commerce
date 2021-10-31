@@ -1,17 +1,23 @@
 import { Box, Text, Image, Button } from "@chakra-ui/react";
-import React from "react";
 import { Link } from "react-router-dom";
-import { MdShoppingBasket } from "react-icons/md";
+import { MdAddShoppingCart, MdRemoveShoppingCart } from "react-icons/md";
+import { useBasket } from "../../context/BasketContext";
 import moment from "moment";
 function Card({ item }) {
+  const { addToBasket, items } = useBasket();
+  const findBasketItem = items.find(
+    (basket_item) => basket_item._id === item._id
+  );
+
   return (
     <Box borderWidth="1px" borderRadius="lg" overflow="hidden" p="3" pb="1">
       <Link to={`/product/${item._id}`}>
         <Box height="30vh">
           <Image
             src={item.image}
-            maxHeight="100%"
-            objectFit="cover"
+            height="100%"
+            width="100%"
+            objectFit="scale-down"
             alt={item.description}
             loading="lazy"
             mx="auto"
@@ -29,14 +35,21 @@ function Card({ item }) {
 
           <Box>
             <Text as="s" mr="3" fontSize="medium">
-              {Math.round(parseInt(item.price).toPrecision(2) * 1.2)}₺
+              {(parseInt(item.price) * 1.2).toFixed(2)} ₺
             </Text>
             {item.price} ₺
           </Box>
         </Box>
       </Link>
-      <Button mb="4" leftIcon={<MdShoppingBasket />}>
-        Add to basket
+      <Button
+        mb="4"
+        leftIcon={
+          findBasketItem ? <MdRemoveShoppingCart /> : <MdAddShoppingCart />
+        }
+        colorScheme={findBasketItem ? "red" : "gray"}
+        onClick={() => addToBasket(item, findBasketItem)}
+      >
+        {findBasketItem ? "Remove from Basket" : "Add to basket"}
       </Button>
     </Box>
   );
