@@ -9,7 +9,6 @@ import { MdShoppingBasket } from "react-icons/md";
 function Navbar() {
   const { isLoggedIn } = useAuth();
   const { items } = useBasket();
-  console.log("basket: ", items);
   return (
     <nav className={styles.nav}>
       <div className={styles.left}>
