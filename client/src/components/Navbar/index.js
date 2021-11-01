@@ -51,6 +51,7 @@ function Navbar() {
                 <Button
                   colorScheme="teal"
                   variant="outline"
+                  me="2"
                   leftIcon={<MdShoppingBasket />}
                 >
                   Basket ({items.length})

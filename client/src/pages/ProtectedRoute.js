@@ -6,7 +6,7 @@ function ProtectedRoute({ component: Component, admin, ...rest }) {
     <Route
       {...rest}
       render={(props) => {
-        if (admin && user.role !== "admin") {
+        if (admin && user?.role !== "admin") {
           return <Redirect to={{ pathname: "/" }} />;
         }
 

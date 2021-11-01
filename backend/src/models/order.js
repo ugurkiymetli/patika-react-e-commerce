@@ -1,20 +1,20 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'user',
+    ref: "user",
   },
-  adress: {
+  address: {
     type: String,
     required: true,
   },
   items: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'product',
+      ref: "product",
     },
   ],
   createdAt: {
@@ -23,6 +23,6 @@ const OrderSchema = new Schema({
   },
 });
 
-const Order = mongoose.model('order', OrderSchema);
+const Order = mongoose.model("order", OrderSchema);
 
 export default Order;

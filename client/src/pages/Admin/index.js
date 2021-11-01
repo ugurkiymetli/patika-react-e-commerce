@@ -1,6 +1,6 @@
 import Styles from "./styles.css";
 import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
-import { Box } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import Home from "./Home";
 import Products from "./Products";
 import Orders from "./Orders";
@@ -12,13 +12,20 @@ function Admin() {
       <nav>
         <ul className="admin-menu">
           <li>
-            <Link to={url}>Home</Link>
+            <Link to={url}>
+              <Button variant="ghost">Home</Button>
+            </Link>
           </li>
           <li>
-            <Link to={`${url}/orders`}>Orders</Link>
+            <Link to={`${url}/orders`}>
+              <Button variant="ghost">Orders</Button>
+            </Link>
           </li>
           <li>
-            <Link to={`${url}/products`}>Products</Link>
+            <Link to={`${url}/products`}>
+              {" "}
+              <Button variant="ghost">Products</Button>
+            </Link>
           </li>
         </ul>
       </nav>

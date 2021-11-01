@@ -26,7 +26,7 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 function Basket() {
   //basket
   const { items, removeFromBasket, emptyBasket } = useBasket();
-  const total = items.reduce((acc, obj) => acc + obj.price, 0);
+  const total = Math.round(items.reduce((acc, obj) => acc + obj.price, 0));
   //modal
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = useRef();
@@ -140,10 +140,10 @@ function Basket() {
                 </ul>
                 <hr />
                 <FormControl>
-                  <FormLabel>Adress: </FormLabel>
+                  <FormLabel>Address: </FormLabel>
                   <Textarea
                     ref={initialRef}
-                    placeholder="Adress"
+                    placeholder="Address"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                   />
