@@ -7,7 +7,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useBasket } from "../../context/BasketContext";
 import { MdShoppingBasket } from "react-icons/md";
 function Navbar() {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, user } = useAuth();
   const { items } = useBasket();
   return (
     <nav className={styles.nav}>
@@ -36,6 +36,13 @@ function Navbar() {
               </Button>
             </Link>
           </>
+        )}
+        {user?.role === "admin" && (
+          <Link to="/admin">
+            <Button colorScheme="teal" variant="ghost">
+              Admin
+            </Button>
+          </Link>
         )}
         {isLoggedIn && (
           <>
