@@ -1,7 +1,6 @@
 import React from "react";
-import { useParams } from "react-router";
-import { useQuery, useQueryClient } from "react-query";
-import { fetchProduct, updateProduct } from "../../../api";
+import { useMutation, useQueryClient } from "react-query";
+import { addProduct } from "../../../api";
 import validationSchema from "./validations";
 import {
   Heading,
@@ -15,20 +14,36 @@ import {
 import { Alert, message } from "antd";
 import { Formik /* ,FieldArray */ } from "formik";
 function NewProduct() {
+  const queryClient = useQueryClient();
+  const newProductMutation = useMutation(addProduct, {
+    onSuccess: () => queryClient.invalidateQueries("admin-products"),
+  });
   const handleSubmit = async (values, bag) => {
-    console.log("added");
+    console.log(values);
+    message.loading({ content: "Loading...", key: "product-add" });
+    newProductMutation.mutate(values, {
+      onSuccess: () => {
+        message.success({
+          content: "The product is added!",
+          key: "product-add",
+          duration: 2,
+        });
+      },
+      onError: () => {
+        message.error("The product has not added!");
+      },
+    });
   };
   return (
     <div>
-      <Heading mt={0} textAlign="center">
-        Product Edit
-      </Heading>
+      <Heading textAlign="center">Product Edit</Heading>
       <Formik
         initialValues={{
-          title: "",
-          description: "",
-          price: "",
-          photos: "",
+          title: "Test Product",
+          description:
+            "Lorem ipsum dolor sit amet consectetur, adipisicing elit.Dicta voluptatem voluptates, officia adipisci quas quisquam esse magni eaque veniam vero saepe in excepturi optio necessitatibus quaerat! Quis cumquea architecto.",
+          price: "99",
+          image: "https://via.placeholder.com/600x480",
         }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
@@ -99,11 +114,11 @@ function NewProduct() {
                     )}
                   </FormControl>
                   <FormControl mt={5}>
-                    <FormLabel>Photos</FormLabel>
+                    <FormLabel>Image</FormLabel>
                     <FormControl>
                       <Input
-                        name="photos"
-                        value={values.photos}
+                        name="image"
+                        value={values.image}
                         disabled={isSubmitting}
                         onBlur={handleBlur}
                         onChange={handleChange}

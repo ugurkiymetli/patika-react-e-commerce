@@ -1,10 +1,10 @@
-import Joi from 'joi';
+import Joi from "joi";
 
 const ProductSchema = Joi.object({
   title: Joi.string().required(),
   description: Joi.string().min(3),
   price: Joi.string().required(),
-  photos: Joi.string(),
+  image: Joi.string(),
 });
 
 export default ProductSchema;
