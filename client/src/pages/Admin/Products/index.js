@@ -3,10 +3,10 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 import { fetchProductList, deleteProduct } from "../../../api";
 
 import { Table, Popconfirm } from "antd";
-import { Box, Heading, Button } from "@chakra-ui/react";
+import { Box, Heading, Button, Flex } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import moment from "moment";
-
+import { MdAdd } from "react-icons/md";
 function Products() {
   const queryClient = useQueryClient();
   const { isLoading, isError, data, error } = useQuery(
@@ -41,7 +41,7 @@ function Products() {
         dataIndex: "action",
         render: (text, record) => (
           <Box display="flex" justifyContent="space-around">
-            <Link to={`admin/products/${record._id}`}>
+            <Link to={`/admin/products/${record._id}`}>
               <Button colorScheme="gray" variant="outline">
                 Edit
               </Button>
@@ -75,7 +75,12 @@ function Products() {
 
   return (
     <div>
-      <Heading textAlign="center">Products</Heading>
+      <Flex mb={4} justifyContent="space-between" alignItems="center">
+        <Heading textAlign="center">Products</Heading>
+        <Link to="/admin/products/new">
+          <Button leftIcon={<MdAdd />}>New Product</Button>
+        </Link>
+      </Flex>
       <Table dataSource={data} columns={columns} rowKey="_id"></Table>
     </div>
   );
