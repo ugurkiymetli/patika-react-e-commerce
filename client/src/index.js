@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
+//css files
 import "./index.css";
 import "./reset.css";
+import "antd/dist/antd.css";
 //contexts
 import { AuthProvider } from "./context/AuthContext";
 import { BasketProvider } from "./context/BasketContext";

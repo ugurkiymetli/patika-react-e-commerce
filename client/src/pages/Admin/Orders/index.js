@@ -7,9 +7,7 @@ import {
   Tbody,
   Tr,
   Th,
-  Td,
   TableCaption,
-  Text,
   Heading,
 } from "@chakra-ui/react";
 function Orders() {
